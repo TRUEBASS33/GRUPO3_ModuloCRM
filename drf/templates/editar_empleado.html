@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Empleado{% endblock %}
+
+{% block content %}
+<h1>Editar Empleado</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="firstName" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" value="{{ empleado.firstName }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" value="{{ empleado.lastName }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ empleado.email }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Teléfono</label>
+        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ empleado.phoneNumber }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="dni" class="form-label">DNI</label>
+        <input type="text" class="form-control" id="dni" name="dni" value="{{ empleado.dni }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="jobPositionId" class="form-label">ID del Puesto</label>
+        <input type="text" class="form-control" id="jobPositionId" name="jobPositionId" value="{{ empleado.jobPosition.pkInt }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="currentSalary" class="form-label">Salario Actual</label>
+        <input type="number" class="form-control" id="currentSalary" name="currentSalary" value="{{ empleado.salaryHistory.currentSalary }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="{% url 'listar_empleados' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

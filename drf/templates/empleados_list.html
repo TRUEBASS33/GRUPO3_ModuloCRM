@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+<h1>Lista de Empleados</h1>
+{% if empleados %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Dirección</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Fecha de Contratación</th>
+            <th>DNI</th>
+            <th>Estado</th>
+            <th>Puesto</th>
+            <th>Departamento</th>
+            <th>Salario Actual</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado.firstName }}</td>
+            <td>{{ empleado.lastName }}</td>
+            <td>{{ empleado.address }}</td>
+            <td>{{ empleado.email }}</td>
+            <td>{{ empleado.phoneNumber }}</td>
+            <td>{{ empleado.hireDate }}</td>
+            <td>{{ empleado.dni }}</td>
+            <td>{{ empleado.status }}</td>
+            <td>{{ empleado.jobPosition.jobPositionName }}</td>
+            <td>{{ empleado.jobPosition.department.departmentName }}</td>
+            <td>{{ empleado.salaryHistory.currentSalary }}</td>
+            <td>
+                <a href="{% url 'editar_empleado' empleado.pkInt %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'eliminar_empleado' empleado.pkInt %}" class="btn btn-danger" 
+                   onclick="return confirm('¿Estás seguro de eliminar este empleado?');">Eliminar</a>
+   
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'crear_empleado' %}" class="btn btn-success">Crear Nuevo Empleado</a>
+
+{% else %}
+<p>No hay empleados disponibles.</p>
+{% endif %}
+{% endblock %}
